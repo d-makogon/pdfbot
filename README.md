@@ -16,3 +16,23 @@ Bot environment variables:
 
 Currently bot only works in whitelist mode. It means you must explicitly specify telegram IDs of users allowed to use the bot.
 
+## Running bot
+
+```bash
+sudo apt update
+sudo apt install -y python3 python3-venv \
+  poppler-utils ghostscript qpdf
+
+mkdir -p /opt/tg-pdf-bot
+cd /opt/tg-pdf-bot
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -U pip
+pip install aiogram aiofiles pydantic
+
+sudo cp tg-pdf-bot.service /etc/systemd/system
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now tg-pdf-bot
+sudo systemctl status tg-pdf-bot --no-pager
+```
