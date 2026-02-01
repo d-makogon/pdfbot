@@ -1,0 +1,20 @@
+[Unit]
+Description=Telegram PDF Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/tg-pdf-bot
+EnvironmentFile=/opt/tg-pdf-bot/.env
+ExecStart=/opt/tg-pdf-bot/.venv/bin/python /opt/tg-pdf-bot/bot.py
+Restart=always
+RestartSec=2
+
+# hardening (not perfect, but better than nothing)
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
